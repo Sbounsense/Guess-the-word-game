@@ -1,0 +1,111 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.clue {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.clueLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.clueText {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.inputRow {
+  display: flex;
+  gap: 10px;
+}
+
+.input {
+  flex: 1;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color 0.15s;
+  background: var(--surface);
+}
+
+.input:focus { border-color: var(--red); }
+.input.correct { border-color: var(--green-dark); background: #f0fff4; }
+.input.wrong { border-color: #ff4d4d; background: #fff5f5; }
+
+.feedCorrect { color: #2d9e4a; font-weight: 700; text-align: center; }
+.feedWrong   { color: #e05555; font-weight: 600; text-align: center; }
+
+.letterGrid {
+  background: var(--surface-alt);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  user-select: none;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.row:last-child { margin-bottom: 0; }
+
+.tile {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #4f4f4f;
+  cursor: pointer;
+  transition: background 0.1s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tile:hover { background: var(--green); transform: scale(1.05); }
+.tile:active { transform: scale(0.95); }
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.skipBtn, .clearBtn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.skipBtn:hover, .clearBtn:hover { background: var(--bg); color: var(--text); }

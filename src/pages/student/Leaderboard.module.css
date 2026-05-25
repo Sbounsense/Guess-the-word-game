@@ -1,0 +1,40 @@
+.list { display: flex; flex-direction: column; gap: 10px; }
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.me { border-color: var(--red); background: #fff5f5; }
+
+.rank { font-size: 1.2rem; width: 36px; text-align: center; flex-shrink: 0; }
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.info { flex: 1; }
+.name { font-weight: 700; font-size: 0.95rem; }
+.sub { display: block; font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; }
+.youTag {
+  display: inline-block;
+  background: var(--red);
+  color: #fff;
+  font-size: 0.68rem;
+  padding: 1px 6px;
+  border-radius: 99px;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+.xp { font-weight: 800; font-size: 1rem; color: var(--red); flex-shrink: 0; }

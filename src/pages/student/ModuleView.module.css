@@ -1,0 +1,29 @@
+.back { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 4px 0; margin-bottom: 8px; display: block; }
+.meta { color: var(--text-muted); margin-bottom: 24px; }
+.list { display: flex; flex-direction: column; gap: 10px; }
+
+.lessonCard {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+}
+
+.num {
+  width: 32px;
+  height: 32px;
+  background: var(--red);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.info { flex: 1; }
+.title { font-weight: 700; }
+.hasDeck { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; display: block; }
+.arrow { color: var(--text-muted); }
