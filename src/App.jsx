@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext.jsx'
-import Navbar from './components/layout/Navbar.jsx'
+import Layout from './components/layout/Layout.jsx'
 import ProtectedRoute from './components/layout/ProtectedRoute.jsx'
 
 import LoginPage from './pages/LoginPage.jsx'
@@ -32,8 +32,7 @@ function AppRoutes() {
   const { currentUser } = useAuth()
 
   return (
-    <>
-      <Navbar />
+    <Layout>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
 
@@ -70,7 +69,7 @@ function AppRoutes() {
 
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </>
+    </Layout>
   )
 }
 

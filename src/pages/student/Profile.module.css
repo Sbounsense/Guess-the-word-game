@@ -1,24 +1,26 @@
-.header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 24px;
-}
+.header { display: flex; align-items: center; gap: 20px; margin-bottom: 24px; }
 
 .avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 800;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #fff;
   flex-shrink: 0;
 }
 
-.name { font-size: 1.5rem; font-weight: 800; margin-bottom: 4px; }
+.name { font-size: 1.3rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -0.02em; }
 
-.statVal { font-size: 1.8rem; font-weight: 800; color: var(--red); }
-.statLabel { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
+.statVal { font-size: 1.7rem; font-weight: 800; color: var(--primary); letter-spacing: -0.03em; }
+.statLabel {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 3px;
+}

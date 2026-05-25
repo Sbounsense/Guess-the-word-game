@@ -7,7 +7,7 @@
   margin: 0 auto;
 }
 
-.hint { color: var(--text-muted); font-size: 0.85rem; }
+.hint { color: var(--text-muted); font-size: 0.82rem; }
 
 .scene {
   width: 100%;
@@ -30,8 +30,6 @@
   position: absolute;
   inset: 0;
   backface-visibility: hidden;
-  background: var(--surface);
-  border: 1.5px solid var(--border);
   border-radius: var(--radius);
   display: flex;
   flex-direction: column;
@@ -39,39 +37,44 @@
   justify-content: center;
   padding: 28px;
   text-align: center;
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border);
 }
 
-.back { transform: rotateY(180deg); background: #fff8e1; }
+.front { background: var(--surface); }
+.back  { background: var(--primary-light); border-color: rgba(26,110,245,0.2); transform: rotateY(180deg); }
 
 .label {
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
   margin-bottom: 12px;
 }
 
-.text { font-size: 1.2rem; font-weight: 600; }
+.back .label { color: var(--primary); }
+
+.text { font-size: 1.15rem; font-weight: 600; color: var(--text); }
 
 .actions {
   display: flex;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
 }
 
 .btnKnow, .btnLearn {
   flex: 1;
-  padding: 12px;
+  padding: 11px;
   border-radius: var(--radius-sm);
-  font-size: 0.9rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  font-weight: 600;
   border: none;
   cursor: pointer;
-  transition: opacity 0.15s;
+  transition: opacity 0.13s, transform 0.1s;
 }
 
-.btnKnow { background: var(--green); color: #2d2d2d; }
-.btnLearn { background: var(--bg); color: var(--text-muted); border: 1.5px solid var(--border); }
+.btnKnow  { background: var(--success); color: #fff; }
+.btnLearn { background: var(--surface); color: var(--text-muted); border: 1px solid var(--border); }
 .btnKnow:hover, .btnLearn:hover { opacity: 0.85; }
+.btnKnow:active, .btnLearn:active { transform: scale(0.97); }

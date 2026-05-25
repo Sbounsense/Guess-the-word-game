@@ -1,17 +1,18 @@
 .card {
   background: var(--surface);
   border-radius: var(--radius);
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
   padding: 20px;
   box-shadow: var(--shadow);
 }
 
 .clickable {
   cursor: pointer;
-  transition: transform 0.15s, box-shadow 0.15s;
+  transition: transform 0.13s, box-shadow 0.13s, border-color 0.13s;
 }
 
 .clickable:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-dark);
 }

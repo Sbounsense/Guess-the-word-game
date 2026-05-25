@@ -4,13 +4,13 @@
   align-items: center;
   justify-content: center;
   padding: 16px;
-  background: linear-gradient(135deg, #fff5f5, #f0f0f0);
+  background: var(--bg);
 }
 
 .card {
   background: var(--surface);
-  border-radius: var(--radius);
-  border: 1.5px solid var(--border);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
   box-shadow: var(--shadow-lg);
   padding: 40px 36px;
   width: 100%;
@@ -18,31 +18,60 @@
   text-align: center;
 }
 
-.logo { font-size: 3rem; line-height: 1; }
-.title { font-size: 1.8rem; font-weight: 800; color: var(--red); margin-top: 8px; }
-.sub { color: var(--text-muted); font-size: 0.9rem; margin-top: 4px; margin-bottom: 24px; }
+.logo {
+  width: 48px;
+  height: 48px;
+  background: var(--primary);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 auto 14px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.03em;
+}
+
+.sub {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  margin-bottom: 28px;
+}
 
 .tabs {
   display: flex;
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   overflow: hidden;
   margin-bottom: 20px;
+  background: var(--bg);
 }
 
 .tab {
   flex: 1;
-  padding: 10px;
+  padding: 9px;
   border: none;
   background: none;
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   font-weight: 600;
   cursor: pointer;
   color: var(--text-muted);
-  transition: background 0.15s;
+  transition: background 0.13s, color 0.13s;
 }
 
-.tab.active { background: var(--red); color: #fff; }
+.tab.active {
+  background: var(--surface);
+  color: var(--primary);
+  box-shadow: var(--shadow);
+}
 
 .userList {
   display: flex;
@@ -55,26 +84,29 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 12px 14px;
-  border: 1.5px solid var(--border);
+  padding: 11px 13px;
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface-alt);
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.13s, background 0.13s;
   width: 100%;
 }
 
-.userBtn:hover { border-color: var(--red); background: #fff5f5; }
+.userBtn:hover {
+  border-color: var(--primary);
+  background: var(--primary-light);
+}
 
 .avatar {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #fff;
   flex-shrink: 0;
 }
@@ -87,9 +119,9 @@
   align-items: flex-start;
 }
 
-.userName { font-weight: 600; font-size: 0.95rem; }
-.arrow { color: var(--text-muted); }
-.empty { color: var(--text-muted); padding: 20px 0; }
+.userName { font-weight: 600; font-size: 0.88rem; }
+.arrow { color: var(--text-light); font-size: 0.85rem; }
+.empty { color: var(--text-muted); padding: 20px 0; font-size: 0.88rem; }
 
 .form {
   display: flex;
@@ -99,40 +131,42 @@
 }
 
 .label {
-  font-size: 0.82rem;
+  font-size: 0.78rem;
   font-weight: 600;
   color: var(--text-muted);
-  margin-top: 4px;
+  margin-top: 6px;
 }
 
 .input {
-  padding: 10px 14px;
-  border: 1.5px solid var(--border);
+  padding: 9px 13px;
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   outline: none;
   background: var(--surface);
-  transition: border-color 0.15s;
+  color: var(--text);
+  transition: border-color 0.13s, box-shadow 0.13s;
 }
 
-.input:focus { border-color: var(--red); }
-
-.roleGroup {
-  display: flex;
-  gap: 8px;
+.input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(26,110,245,0.1);
 }
+
+.roleGroup { display: flex; gap: 8px; }
 
 .roleBtn {
   flex: 1;
   padding: 9px 4px;
-  border: 1.5px solid var(--border);
+  border: 1px solid var(--border);
   border-radius: var(--radius-sm);
   background: var(--surface-alt);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.13s, background 0.13s, color 0.13s;
+  color: var(--text-muted);
 }
 
-.roleBtn:hover { border-color: var(--red); }
-.roleActive { border-color: var(--red); background: #fff5f5; color: var(--red); }
+.roleBtn:hover { border-color: var(--primary-mid); color: var(--primary); }
+.roleActive { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }

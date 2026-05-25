@@ -44,7 +44,7 @@ export default function LoginPage() {
   return (
     <div className={styles.page}>
       <div className={styles.card}>
-        <div className={styles.logo}>🎓</div>
+        <div className={styles.logo}>E</div>
         <h1 className={styles.title}>EduQuest</h1>
         <p className={styles.sub}>Education Centre Platform</p>
 

@@ -1,6 +1,13 @@
-.statVal { font-size: 2rem; font-weight: 800; color: var(--red); }
-.statLabel { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); font-weight: 600; margin-top: 4px; }
-.section { margin-bottom: 32px; }
-.itemCard { cursor: pointer; }
-.itemTitle { font-weight: 700; margin-bottom: 4px; }
-.itemMeta { font-size: 0.82rem; color: var(--text-muted); }
+.statVal { font-size: 1.8rem; font-weight: 800; color: var(--primary); letter-spacing: -0.03em; }
+.statLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 4px;
+}
+.section { margin-bottom: 28px; }
+.itemCard { cursor: pointer; padding: 14px 18px; }
+.itemTitle { font-weight: 700; margin-bottom: 4px; font-size: 0.92rem; }
+.itemMeta { font-size: 0.78rem; color: var(--text-muted); }
