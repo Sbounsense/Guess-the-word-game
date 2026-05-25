@@ -1,0 +1,40 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 12px;
+}
+
+.badge {
+  border-radius: var(--radius);
+  padding: 14px 8px;
+  text-align: center;
+  position: relative;
+  border: 1.5px solid var(--border);
+}
+
+.earned {
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.locked {
+  background: var(--bg);
+  opacity: 0.5;
+}
+
+.icon { font-size: 1.8rem; display: block; }
+
+.name {
+  font-size: 0.72rem;
+  font-weight: 600;
+  display: block;
+  margin-top: 6px;
+  color: var(--text-muted);
+}
+
+.lock {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 0.7rem;
+}

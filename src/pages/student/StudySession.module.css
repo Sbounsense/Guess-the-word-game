@@ -1,0 +1,143 @@
+.page {
+  min-height: 100vh;
+  padding: 24px 16px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.toast {
+  position: fixed;
+  top: 80px;
+  right: 24px;
+  background: var(--green);
+  color: #2d2d2d;
+  font-weight: 800;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  border-radius: 99px;
+  box-shadow: var(--shadow-lg);
+  z-index: 500;
+  animation: slideIn 0.3s ease;
+}
+
+.badgeToast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 600;
+  cursor: pointer;
+}
+
+.badgeInner {
+  background: var(--yellow);
+  border-radius: var(--radius);
+  padding: 14px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dismiss { font-size: 0.75rem; font-weight: 400; color: var(--text-muted); }
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.modeSelect {
+  text-align: center;
+  padding-top: 24px;
+}
+
+.deckTitle { font-size: 1.6rem; font-weight: 800; }
+.cardCount { color: var(--text-muted); margin-bottom: 32px; }
+.pickLabel { font-size: 1rem; font-weight: 600; margin-bottom: 20px; color: var(--text-muted); }
+
+.modeGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.modeCard {
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, transform 0.15s;
+}
+
+.modeCard:hover { border-color: var(--red); transform: translateY(-3px); }
+
+.modeIcon { font-size: 2rem; }
+.modeName { font-size: 0.95rem; font-weight: 700; }
+.modeDesc { font-size: 0.78rem; color: var(--text-muted); }
+
+.back { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 8px; }
+
+.session { padding-top: 12px; }
+
+.progress {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--text-muted);
+}
+
+.progressBar {
+  height: 6px;
+  background: var(--border);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--red);
+  border-radius: 99px;
+  transition: width 0.3s;
+}
+
+.results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.resultsCard {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 40px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  max-width: 380px;
+  width: 100%;
+}
+
+.resultIcon { font-size: 3rem; margin-bottom: 12px; }
+.score { font-size: 3rem; font-weight: 800; color: var(--red); margin: 8px 0; }
+.xpEarned { color: var(--green-dark); font-weight: 700; font-size: 1.1rem; }
+.accuracy { color: var(--text-muted); margin-top: 4px; }
+
+.resultActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+  justify-content: center;
+}

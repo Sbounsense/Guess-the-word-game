@@ -1,0 +1,53 @@
+.back { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 4px 0; margin-bottom: 8px; display: block; }
+.due { color: var(--red); font-weight: 600; margin-bottom: 20px; }
+
+.instructions h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
+.instructions p { color: var(--text-muted); }
+
+.doneCard {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #f0fff4;
+  border-color: #69db7c;
+}
+
+.doneIcon { font-size: 2rem; }
+.doneTitle { font-weight: 700; }
+.doneSub { font-size: 0.85rem; color: var(--text-muted); }
+
+.deckCard {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.deckInfo { display: flex; align-items: center; gap: 14px; }
+.deckIcon { font-size: 2rem; }
+.deckTitle { font-weight: 700; }
+.deckCount { font-size: 0.82rem; color: var(--text-muted); }
+
+.form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
+
+.textarea {
+  padding: 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  resize: vertical;
+  outline: none;
+  font-family: var(--font);
+}
+
+.textarea:focus { border-color: var(--red); }

@@ -1,0 +1,45 @@
+.back { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 4px 0; margin-bottom: 8px; display: block; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.label { font-size: 0.82rem; font-weight: 600; color: var(--text-muted); }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+
+.input, .select, .textarea {
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  outline: none;
+  background: var(--surface);
+  font-family: var(--font);
+}
+
+.textarea { resize: vertical; }
+.input:focus, .select:focus, .textarea:focus { border-color: var(--red); }
+
+.studentList { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+
+.studentChk {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.sAvatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.7rem;
+  color: #fff;
+}
+
+.noStudents { color: var(--text-muted); font-size: 0.85rem; }

@@ -1,0 +1,21 @@
+.back { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 4px 0; margin-bottom: 8px; display: block; }
+
+.content { line-height: 1.8; }
+
+.heading { font-size: 1rem; font-weight: 700; margin: 16px 0 6px; }
+.para { margin-bottom: 12px; }
+.li { margin-left: 20px; margin-bottom: 4px; }
+
+.practiceCard {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.practiceInfo { display: flex; align-items: center; gap: 14px; }
+.practiceIcon { font-size: 2rem; }
+.practiceTitle { font-weight: 700; }
+.practiceCount { font-size: 0.82rem; color: var(--text-muted); }

@@ -1,0 +1,15 @@
+.header { margin-bottom: 20px; }
+.streak { color: var(--orange); font-weight: 600; margin-top: 4px; }
+.section { margin-top: 32px; }
+
+.hwList { display: flex; flex-direction: column; gap: 10px; }
+
+.hwCard { cursor: pointer; }
+.hwTitle { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+.hwMeta { display: flex; justify-content: space-between; align-items: center; }
+.due { font-size: 0.82rem; color: var(--red); font-weight: 600; }
+.arrow { color: var(--text-muted); }
+
+.modCard { cursor: pointer; }
+.modTitle { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
+.modMeta { font-size: 0.82rem; color: var(--text-muted); }
