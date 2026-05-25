@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useData } from '../../context/DataContext.jsx'
 import { genId } from '../../utils/id.js'
@@ -9,15 +9,19 @@ import styles from './HomeworkEditor.module.css'
 
 export default function HomeworkEditor() {
   const { currentUser } = useAuth()
-  const { saveHomework, getModules, getDecks, getUsers } = useData()
+  const { saveHomework, deleteHomework, getHomework, getModules, getDecks, getUsers } = useData()
   const navigate = useNavigate()
+  const { hwId } = useParams()
 
-  const [title, setTitle] = useState('')
-  const [instructions, setInstructions] = useState('')
-  const [moduleId, setModuleId] = useState('')
-  const [deckId, setDeckId] = useState('')
-  const [dueDate, setDueDate] = useState('')
-  const [assignedTo, setAssignedTo] = useState([])
+  const isEdit = !!hwId
+  const existing = isEdit ? getHomework().find(h => h.id === hwId) : null
+
+  const [title, setTitle] = useState(existing?.title || '')
+  const [instructions, setInstructions] = useState(existing?.instructions || '')
+  const [moduleId, setModuleId] = useState(existing?.moduleId || '')
+  const [deckId, setDeckId] = useState(existing?.deckId || '')
+  const [dueDate, setDueDate] = useState(existing?.dueDate || '')
+  const [assignedTo, setAssignedTo] = useState(existing?.assignedTo || [])
 
   const modules = getModules()
   const decks = getDecks()
@@ -28,22 +32,31 @@ export default function HomeworkEditor() {
   const handleSave = (e) => {
     e.preventDefault()
     saveHomework({
-      id: genId('hw'),
+      id: isEdit ? hwId : genId('hw'),
       title,
       instructions,
       moduleId: moduleId || null,
       deckId: deckId || null,
       dueDate: dueDate || null,
       assignedTo,
-      createdBy: currentUser.id,
+      createdBy: existing?.createdBy || currentUser.id,
     })
     navigate('/teacher')
   }
 
+  const handleDelete = () => {
+    if (window.confirm('Delete this homework? This cannot be undone.')) {
+      deleteHomework(hwId)
+      navigate('/teacher')
+    }
+  }
+
+  if (isEdit && !existing) return <div className="page"><p>Homework not found.</p></div>
+
   return (
     <div className="page">
       <button className={styles.back} onClick={() => navigate('/teacher')}>← Back</button>
-      <h1 className="page-title">New Homework</h1>
+      <h1 className="page-title">{isEdit ? 'Edit Homework' : 'New Homework'}</h1>
 
       <form onSubmit={handleSave}>
         <Card style={{ marginBottom: 20 }}>
@@ -93,7 +106,14 @@ export default function HomeworkEditor() {
           </div>
         </Card>
 
-        <Button type="submit" variant="primary">Create Homework</Button>
+        <div className={styles.actions}>
+          <Button type="submit" variant="primary">{isEdit ? 'Save Changes' : 'Create Homework'}</Button>
+          {isEdit && (
+            <button type="button" className={styles.deleteBtn} onClick={handleDelete}>
+              Delete Homework
+            </button>
+          )}
+        </div>
       </form>
     </div>
   )

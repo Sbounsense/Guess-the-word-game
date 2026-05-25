@@ -9,6 +9,7 @@ const KEYS = {
   DECKS: 'eq_decks',
   PROGRESS: 'eq_progress',
   GAMIFICATION: 'eq_gamification',
+  COMPLETIONS: 'eq_completions',
   SEEDED: 'eq_seeded',
 }
 
@@ -87,6 +88,10 @@ export const storage = {
     all[userId] = data
     set(KEYS.GAMIFICATION, all)
   },
+
+  // Completions
+  getCompletions: () => get(KEYS.COMPLETIONS) || [],
+  setCompletions: (v) => set(KEYS.COMPLETIONS, v),
 
   // Seed flag
   isSeeded: () => !!get(KEYS.SEEDED),

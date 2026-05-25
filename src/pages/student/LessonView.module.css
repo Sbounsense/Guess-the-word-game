@@ -19,3 +19,28 @@
 .practiceIcon { font-size: 2rem; }
 .practiceTitle { font-weight: 700; }
 .practiceCount { font-size: 0.82rem; color: var(--text-muted); }
+
+.titleRow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+.completedBadge {
+  font-size: 0.78rem; font-weight: 700; color: #065f46;
+  background: #d1fae5; padding: 3px 10px; border-radius: 99px;
+}
+
+.videoWrap { margin-bottom: 20px; }
+.videoLabel { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 8px; }
+.videoFrame { position: relative; padding-bottom: 56.25%; border-radius: var(--radius); overflow: hidden; background: #000; }
+.videoFrame iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.pdfCard { margin-top: 16px; display: flex; align-items: center; gap: 14px; }
+.pdfIcon { font-size: 2rem; }
+.pdfInfo { flex: 1; }
+.pdfTitle { font-weight: 700; margin-bottom: 6px; }
+.pdfBtn {
+  background: none; border: 1.5px solid var(--primary); color: var(--primary);
+  padding: 6px 14px; border-radius: var(--radius-sm); font-size: 0.85rem;
+  font-weight: 600; cursor: pointer; font-family: var(--font);
+  transition: background 0.13s, color 0.13s;
+}
+.pdfBtn:hover { background: var(--primary); color: #fff; }
+
+.completeWrap { margin-top: 24px; }

@@ -13,6 +13,7 @@ import HomeworkView from './pages/student/HomeworkView.jsx'
 import StudySession from './pages/student/StudySession.jsx'
 import Leaderboard from './pages/student/Leaderboard.jsx'
 import Profile from './pages/student/Profile.jsx'
+import SessionHistory from './pages/student/SessionHistory.jsx'
 
 // Teacher pages
 import TeacherDashboard from './pages/teacher/TeacherDashboard.jsx'
@@ -21,6 +22,8 @@ import ModuleEditor from './pages/teacher/ModuleEditor.jsx'
 import LessonEditor from './pages/teacher/LessonEditor.jsx'
 import HomeworkEditor from './pages/teacher/HomeworkEditor.jsx'
 import ClassProgress from './pages/teacher/ClassProgress.jsx'
+import GradingView from './pages/teacher/GradingView.jsx'
+import StudentDetail from './pages/teacher/StudentDetail.jsx'
 
 // Admin pages
 import AdminDashboard from './pages/admin/AdminDashboard.jsx'
@@ -50,6 +53,7 @@ function AppRoutes() {
         <Route path="/study/:deckId" element={<ProtectedRoute roles={['student']}><StudySession /></ProtectedRoute>} />
         <Route path="/leaderboard" element={<ProtectedRoute roles={['student']}><Leaderboard /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute roles={['student']}><Profile /></ProtectedRoute>} />
+        <Route path="/student/history" element={<ProtectedRoute roles={['student']}><SessionHistory /></ProtectedRoute>} />
 
         {/* Teacher */}
         <Route path="/teacher" element={<ProtectedRoute roles={['teacher']}><TeacherDashboard /></ProtectedRoute>} />
@@ -59,6 +63,9 @@ function AppRoutes() {
         <Route path="/teacher/modules/:moduleId" element={<ProtectedRoute roles={['teacher']}><ModuleEditor /></ProtectedRoute>} />
         <Route path="/teacher/lessons/:lessonId/edit" element={<ProtectedRoute roles={['teacher']}><LessonEditor /></ProtectedRoute>} />
         <Route path="/teacher/homework/new" element={<ProtectedRoute roles={['teacher']}><HomeworkEditor /></ProtectedRoute>} />
+        <Route path="/teacher/homework/:hwId/edit" element={<ProtectedRoute roles={['teacher']}><HomeworkEditor /></ProtectedRoute>} />
+        <Route path="/teacher/homework/:hwId/grade" element={<ProtectedRoute roles={['teacher']}><GradingView /></ProtectedRoute>} />
+        <Route path="/teacher/students/:studentId" element={<ProtectedRoute roles={['teacher']}><StudentDetail /></ProtectedRoute>} />
         <Route path="/teacher/progress" element={<ProtectedRoute roles={['teacher']}><ClassProgress /></ProtectedRoute>} />
 
         {/* Admin */}

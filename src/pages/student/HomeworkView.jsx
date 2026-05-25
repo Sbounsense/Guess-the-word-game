@@ -6,6 +6,8 @@ import Button from '../../components/ui/Button.jsx'
 import Card from '../../components/ui/Card.jsx'
 import styles from './HomeworkView.module.css'
 
+const today = new Date().toISOString().slice(0, 10)
+
 export default function HomeworkView() {
   const { homeworkId } = useParams()
   const { getHomework, getDeck, getSubmissions, saveSubmission } = useData()
@@ -21,6 +23,10 @@ export default function HomeworkView() {
 
   if (!hw) return <div className="page"><p>Homework not found.</p></div>
 
+  const overdue = hw.dueDate && hw.dueDate < today
+  const isGraded = existing && (existing.teacherScore !== undefined && existing.teacherScore !== null)
+  const isAwaitingReview = existing && !isGraded
+
   const handleSubmitText = (e) => {
     e.preventDefault()
     saveSubmission({ homeworkId, studentId: currentUser.id, answer: textAnswer, score: null, total: null })
@@ -31,22 +37,46 @@ export default function HomeworkView() {
     <div className="page">
       <button className={styles.back} onClick={() => navigate('/student')}>← Dashboard</button>
       <h1 className="page-title">{hw.title}</h1>
-      {hw.dueDate && <p className={styles.due}>Due: {hw.dueDate}</p>}
+      {hw.dueDate && (
+        <p className={overdue ? styles.overdue : styles.due}>
+          {overdue ? '⚠ OVERDUE · ' : ''}Due: {hw.dueDate}
+        </p>
+      )}
 
       <Card className={styles.instructions}>
         <h3>Instructions</h3>
         <p>{hw.instructions}</p>
       </Card>
 
-      {submitted ? (
-        <Card className={styles.doneCard}>
-          <span className={styles.doneIcon}>✅</span>
+      {isGraded && (
+        <Card className={styles.gradeCard}>
+          <div className={styles.gradeHeader}>
+            <span className={styles.gradeIcon}>🎓</span>
+            <div>
+              <div className={styles.gradeTitle}>Your Grade</div>
+              <div className={styles.gradeScore}>{existing.teacherScore}/100</div>
+            </div>
+          </div>
+          {existing.feedback && (
+            <div className={styles.feedback}>
+              <span className={styles.feedbackLabel}>Teacher's feedback:</span>
+              <p className={styles.feedbackText}>{existing.feedback}</p>
+            </div>
+          )}
+        </Card>
+      )}
+
+      {isAwaitingReview && (
+        <Card className={styles.awaitingCard}>
+          <span className={styles.awaitingIcon}>⏳</span>
           <div>
-            <div className={styles.doneTitle}>Homework submitted!</div>
-            <div className={styles.doneSub}>Your teacher will review it.</div>
+            <div className={styles.awaitingTitle}>Awaiting review</div>
+            <div className={styles.awaitingSub}>Your teacher will grade this soon.</div>
           </div>
         </Card>
-      ) : (
+      )}
+
+      {!submitted ? (
         <>
           {deck && (
             <Card className={styles.deckCard}>
@@ -83,6 +113,14 @@ export default function HomeworkView() {
             </form>
           )}
         </>
+      ) : !isGraded && !isAwaitingReview && (
+        <Card className={styles.doneCard}>
+          <span className={styles.doneIcon}>✅</span>
+          <div>
+            <div className={styles.doneTitle}>Homework submitted!</div>
+            <div className={styles.doneSub}>Your teacher will review it.</div>
+          </div>
+        </Card>
       )}
     </div>
   )

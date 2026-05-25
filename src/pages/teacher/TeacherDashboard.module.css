@@ -8,6 +8,34 @@
   margin-top: 4px;
 }
 .section { margin-bottom: 28px; }
-.itemCard { cursor: pointer; padding: 14px 18px; }
+.itemCard { cursor: default; padding: 14px 18px; }
 .itemTitle { font-weight: 700; margin-bottom: 4px; font-size: 0.92rem; }
 .itemMeta { font-size: 0.78rem; color: var(--text-muted); }
+
+.hwTop { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+.ungradedBadge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: #fff3e0;
+  color: #e65100;
+  padding: 2px 7px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.hwActions { display: flex; gap: 6px; margin-top: 10px; }
+
+.hwBtn {
+  background: none;
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  font-weight: 500;
+  font-family: var(--font);
+  transition: border-color 0.13s, color 0.13s;
+}
+.hwBtn:hover { border-color: var(--primary); color: var(--primary); }
+.hwBtnDanger:hover { border-color: var(--danger); color: var(--danger); }

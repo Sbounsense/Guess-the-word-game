@@ -1,5 +1,20 @@
 .back { background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 0.9rem; padding: 4px 0; margin-bottom: 8px; display: block; }
-.due { color: var(--red); font-weight: 600; margin-bottom: 20px; }
+.due { color: var(--text-muted); font-weight: 600; margin-bottom: 20px; }
+.overdue { color: var(--danger); font-weight: 700; margin-bottom: 20px; }
+
+.gradeCard { margin-top: 20px; background: #f0fff4; border-color: #6ee7b7; }
+.gradeHeader { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.gradeIcon { font-size: 2rem; }
+.gradeTitle { font-weight: 700; font-size: 0.88rem; color: var(--text-muted); margin-bottom: 2px; }
+.gradeScore { font-size: 1.8rem; font-weight: 800; color: #065f46; }
+.feedback { border-top: 1px solid #a7f3d0; padding-top: 10px; }
+.feedbackLabel { font-size: 0.78rem; font-weight: 700; color: #065f46; }
+.feedbackText { margin: 4px 0 0; font-size: 0.88rem; color: var(--text-sub); }
+
+.awaitingCard { margin-top: 20px; display: flex; align-items: center; gap: 16px; background: #fffbeb; border-color: #fcd34d; }
+.awaitingIcon { font-size: 2rem; }
+.awaitingTitle { font-weight: 700; }
+.awaitingSub { font-size: 0.85rem; color: var(--text-muted); }
 
 .instructions h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; }
 .instructions p { color: var(--text-muted); }

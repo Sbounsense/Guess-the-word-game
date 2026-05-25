@@ -27,3 +27,20 @@
 .textarea:focus { border-color: var(--red); }
 
 .hint { font-size: 0.75rem; color: var(--text-muted); }
+.warning { font-size: 0.75rem; color: var(--danger); margin-top: 4px; }
+
+.sectionHead { display: flex; align-items: center; gap: 12px; }
+.sectionIcon { font-size: 1.5rem; }
+.sectionTitle { font-weight: 700; font-size: 0.92rem; }
+.sectionSub { font-size: 0.78rem; color: var(--text-muted); }
+
+.videoPreviewWrap { margin-top: 12px; }
+.videoPreviewLabel { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 6px; }
+.videoFrame { position: relative; padding-bottom: 40%; border-radius: var(--radius-sm); overflow: hidden; background: #000; }
+.videoFrame iframe { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.pdfToggle { display: flex; gap: 0; margin-top: 12px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; width: fit-content; }
+.toggleBtn { background: none; border: none; padding: 6px 16px; font-size: 0.82rem; font-weight: 600; cursor: pointer; color: var(--text-muted); font-family: var(--font); transition: background 0.13s, color 0.13s; }
+.toggleActive { background: var(--primary); color: #fff; }
+
+.fileInput { font-size: 0.85rem; }

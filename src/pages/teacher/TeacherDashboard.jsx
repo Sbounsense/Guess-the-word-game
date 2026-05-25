@@ -7,12 +7,18 @@ import styles from './TeacherDashboard.module.css'
 
 export default function TeacherDashboard() {
   const { currentUser } = useAuth()
-  const { getModules, getDecks, getHomework, getLessons } = useData()
+  const { getModules, getDecks, getHomework, getLessons, getSubmissions, deleteHomework } = useData()
   const navigate = useNavigate()
 
   const myModules = getModules().filter(m => m.createdBy === currentUser.id)
   const myDecks = getDecks().filter(d => d.createdBy === currentUser.id)
   const myHomework = getHomework().filter(h => h.createdBy === currentUser.id)
+  const allSubmissions = getSubmissions()
+
+  const handleDelete = (e, id) => {
+    e.stopPropagation()
+    if (window.confirm('Delete this homework?')) deleteHomework(id)
+  }
 
   return (
     <div className="page">
@@ -85,12 +91,32 @@ export default function TeacherDashboard() {
           <div className="empty-state"><p>No homework tasks yet.</p></div>
         ) : (
           <div className="grid-2">
-            {myHomework.map(h => (
-              <Card key={h.id} className={styles.itemCard}>
-                <div className={styles.itemTitle}>{h.title}</div>
-                <div className={styles.itemMeta}>Due {h.dueDate || 'No deadline'} · {h.assignedTo?.length || 0} students</div>
-              </Card>
-            ))}
+            {myHomework.map(h => {
+              const subs = allSubmissions.filter(s => s.homeworkId === h.id)
+              const ungraded = subs.filter(s => s.score === null && s.submittedAt).length
+              return (
+                <Card key={h.id} className={styles.itemCard}>
+                  <div className={styles.hwTop}>
+                    <div className={styles.itemTitle}>{h.title}</div>
+                    {ungraded > 0 && (
+                      <span className={styles.ungradedBadge}>{ungraded} ungraded</span>
+                    )}
+                  </div>
+                  <div className={styles.itemMeta}>Due {h.dueDate || 'No deadline'} · {h.assignedTo?.length || 0} students</div>
+                  <div className={styles.hwActions}>
+                    <button className={styles.hwBtn} onClick={() => navigate(`/teacher/homework/${h.id}/grade`)}>
+                      Grade ({subs.length})
+                    </button>
+                    <button className={styles.hwBtn} onClick={() => navigate(`/teacher/homework/${h.id}/edit`)}>
+                      Edit
+                    </button>
+                    <button className={`${styles.hwBtn} ${styles.hwBtnDanger}`} onClick={(e) => handleDelete(e, h.id)}>
+                      Delete
+                    </button>
+                  </div>
+                </Card>
+              )
+            })}
           </div>
         )}
       </section>

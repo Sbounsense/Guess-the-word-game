@@ -136,6 +136,23 @@ export function DataProvider({ children }) {
     refresh()
     return newSub
   }
+  const updateSubmission = (id, updates) => {
+    const all = storage.getSubmissions().map(s => s.id === id ? { ...s, ...updates } : s)
+    storage.setSubmissions(all)
+    refresh()
+  }
+
+  // Completions
+  const getCompletions = (userId) => storage.getCompletions().filter(c => c.userId === userId)
+  const completeLesson = (userId, lessonId) => {
+    const all = storage.getCompletions()
+    const exists = all.find(c => c.userId === userId && c.lessonId === lessonId)
+    if (!exists) {
+      all.push({ userId, lessonId, completedAt: new Date().toISOString() })
+      storage.setCompletions(all)
+      refresh()
+    }
+  }
 
   return (
     <DataContext.Provider value={{
@@ -146,7 +163,8 @@ export function DataProvider({ children }) {
       getModules, saveModule, deleteModule,
       getLessons, saveLesson, deleteLesson,
       getHomework, saveHomework, deleteHomework,
-      getSubmissions, saveSubmission,
+      getSubmissions, saveSubmission, updateSubmission,
+      getCompletions, completeLesson,
     }}>
       {children}
     </DataContext.Provider>

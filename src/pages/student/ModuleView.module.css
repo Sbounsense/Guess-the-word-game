@@ -2,12 +2,22 @@
 .meta { color: var(--text-muted); margin-bottom: 24px; }
 .list { display: flex; flex-direction: column; gap: 10px; }
 
+.titleRow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.progress { font-size: 0.78rem; font-weight: 700; color: var(--primary); background: var(--primary-light); padding: 3px 10px; border-radius: 99px; }
+
+.progressBarWrap { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.progressBar { flex: 1; height: 6px; background: var(--border); border-radius: 99px; }
+.progressFill { height: 100%; background: var(--primary); border-radius: 99px; transition: width 0.3s; }
+.pct { font-size: 0.78rem; color: var(--text-muted); width: 36px; text-align: right; }
+
 .lessonCard {
   display: flex;
   align-items: center;
   gap: 16px;
   cursor: pointer;
 }
+
+.doneCard { opacity: 0.8; }
 
 .num {
   width: 32px;
@@ -23,7 +33,11 @@
   flex-shrink: 0;
 }
 
+.check { font-size: 1rem; }
+.doneCard .num { background: var(--success); }
+
 .info { flex: 1; }
 .title { font-weight: 700; }
 .hasDeck { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; display: block; }
+.hasVideo { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; display: inline-block; margin-left: 8px; }
 .arrow { color: var(--text-muted); }

@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useGamification } from '../../context/GamificationContext.jsx'
 import { storage } from '../../services/storage.js'
@@ -5,11 +6,13 @@ import { calcLevel } from '../../utils/gamification.js'
 import XPBar from '../../components/gamification/XPBar.jsx'
 import BadgeGrid from '../../components/gamification/BadgeGrid.jsx'
 import Card from '../../components/ui/Card.jsx'
+import Button from '../../components/ui/Button.jsx'
 import styles from './Profile.module.css'
 
 export default function Profile() {
   const { currentUser } = useAuth()
   const { getUserStats } = useGamification()
+  const navigate = useNavigate()
   const stats = getUserStats(currentUser.id)
   const progress = storage.getProgress().filter(p => p.userId === currentUser.id)
   const lvl = calcLevel(stats.totalXP)
@@ -53,6 +56,12 @@ export default function Profile() {
         <h2 className="section-title" style={{ marginBottom: 16 }}>Badges</h2>
         <BadgeGrid earnedIds={stats.badges || []} />
       </Card>
+
+      <div style={{ marginTop: 20 }}>
+        <Button variant="secondary" onClick={() => navigate('/student/history')}>
+          View Session History →
+        </Button>
+      </div>
     </div>
   )
 }

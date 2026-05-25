@@ -43,3 +43,19 @@
 }
 
 .noStudents { color: var(--text-muted); font-size: 0.85rem; }
+
+.actions { display: flex; align-items: center; gap: 12px; }
+
+.deleteBtn {
+  background: none;
+  border: 1.5px solid var(--danger);
+  color: var(--danger);
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.13s, color 0.13s;
+}
+.deleteBtn:hover { background: var(--danger); color: #fff; }

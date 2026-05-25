@@ -17,9 +17,12 @@
 
 .hwMeta { display: flex; justify-content: space-between; align-items: center; }
 
-.due { font-size: 0.78rem; color: var(--danger); font-weight: 600; }
+.due { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
+.overdue { font-size: 0.78rem; color: var(--danger); font-weight: 700; }
 .arrow { color: var(--text-light); font-size: 0.85rem; }
 
 .modCard { cursor: pointer; }
 .modTitle { font-weight: 700; margin-bottom: 4px; font-size: 0.92rem; }
-.modMeta { font-size: 0.78rem; color: var(--text-muted); }
+.modMeta { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 8px; }
+.modBar { height: 4px; background: var(--border); border-radius: 99px; }
+.modFill { height: 100%; background: var(--primary); border-radius: 99px; transition: width 0.3s; }

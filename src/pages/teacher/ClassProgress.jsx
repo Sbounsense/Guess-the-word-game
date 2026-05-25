@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useData } from '../../context/DataContext.jsx'
 import { storage } from '../../services/storage.js'
@@ -7,6 +8,7 @@ import styles from './ClassProgress.module.css'
 export default function ClassProgress() {
   const { currentUser } = useAuth()
   const { getUsers, getModules, getSubmissions, getHomework } = useData()
+  const navigate = useNavigate()
 
   const students = getUsers().filter(u => u.role === 'student' && u.active !== false)
   const progress = storage.getProgress()
@@ -42,7 +44,7 @@ export default function ClassProgress() {
                 const g = storage.getUserGamification(s.id)
 
                 return (
-                  <tr key={s.id}>
+                  <tr key={s.id} onClick={() => navigate(`/teacher/students/${s.id}`)} style={{ cursor: 'pointer' }}>
                     <td>
                       <div className={styles.studentCell}>
                         <span className={styles.avatar} style={{ background: s.avatarColor }}>{s.name[0]}</span>
