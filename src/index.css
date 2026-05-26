@@ -92,6 +92,21 @@ input, textarea, select { font-family: var(--font); font-size: 14px; }
   min-width: 0;
 }
 
+@media (max-width: 768px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .app-main {
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .page {
+    padding: 20px 16px;
+  }
+}
+
 /* ── Page wrapper ───────────────────────────── */
 .page {
   padding: 28px 32px;

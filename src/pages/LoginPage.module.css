@@ -7,6 +7,17 @@
   background: var(--bg);
 }
 
+@media (max-width: 480px) {
+  .page {
+    align-items: flex-start;
+    padding-top: 40px;
+  }
+
+  .card {
+    padding: 28px 20px;
+  }
+}
+
 .card {
   background: var(--surface);
   border-radius: var(--radius-lg);
