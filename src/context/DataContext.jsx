@@ -18,12 +18,13 @@ export function DataProvider({ children }) {
   const [progress,    setProgress]    = useState([])
   const [gamification,setGamification]= useState({})
   const [completions, setCompletions] = useState([])
+  const [tasks,       setTasks]       = useState([])
   const [dataLoading, setDataLoading] = useState(true)
 
   const clearAll = () => {
     setSubjects([]); setUsers([]); setDecks([]); setModules([])
     setLessons([]); setHomework([]); setSubmissions([]); setProgress([])
-    setGamification({}); setCompletions([])
+    setGamification({}); setCompletions([]); setTasks([])
   }
 
   const loadAll = useCallback(async () => {
@@ -31,7 +32,7 @@ export function DataProvider({ children }) {
     const [
       { data: s }, { data: u }, { data: d }, { data: m },
       { data: l }, { data: h }, { data: sb }, { data: p },
-      { data: g }, { data: c },
+      { data: g }, { data: c }, { data: tk },
     ] = await Promise.all([
       supabase.from('subjects').select('*'),
       supabase.from('profiles').select('*'),
@@ -43,6 +44,7 @@ export function DataProvider({ children }) {
       supabase.from('progress').select('*'),
       supabase.from('gamification').select('*'),
       supabase.from('completions').select('*'),
+      supabase.from('tasks').select('*'),
     ])
     setSubjects(s || [])
     setUsers(u || [])
@@ -56,6 +58,7 @@ export function DataProvider({ children }) {
     ;(g || []).forEach(row => { gamiMap[row.userId] = row })
     setGamification(gamiMap)
     setCompletions(c || [])
+    setTasks(tk || [])
     setDataLoading(false)
   }, [])
 
@@ -201,6 +204,19 @@ export function DataProvider({ children }) {
     await supabase.from('completions').upsert(obj)
   }
 
+  // ── Tasks ─────────────────────────────────────────────────
+  const getTasks = (userId) => tasks.filter(t => t.userId === userId)
+  const saveTask = async (task) => {
+    const obj = { ...task, id: task.id || genId('task'), createdAt: task.createdAt || new Date().toISOString() }
+    setTasks(prev => { const i = prev.findIndex(t => t.id === obj.id); if (i >= 0) { const n = [...prev]; n[i] = obj; return n } return [...prev, obj] })
+    await supabase.from('tasks').upsert(obj)
+    return obj
+  }
+  const deleteTask = async (id) => {
+    setTasks(prev => prev.filter(t => t.id !== id))
+    await supabase.from('tasks').delete().eq('id', id)
+  }
+
   return (
     <DataContext.Provider value={{
       dataLoading,
@@ -214,6 +230,7 @@ export function DataProvider({ children }) {
       getProgress, saveProgress,
       getUserGamification, setUserGamification, getAllGamification,
       getCompletions, completeLesson,
+      getTasks, saveTask, deleteTask,
     }}>
       {children}
     </DataContext.Provider>

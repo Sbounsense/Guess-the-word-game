@@ -133,6 +133,17 @@ CREATE TABLE IF NOT EXISTS completions (
   PRIMARY KEY ("userId", "lessonId")
 );
 
+-- ── Personal tasks ────────────────────────────────────────────
+CREATE TABLE IF NOT EXISTS tasks (
+  id TEXT PRIMARY KEY,
+  "userId" TEXT NOT NULL,
+  title TEXT NOT NULL,
+  priority TEXT DEFAULT 'medium' CHECK (priority IN ('high', 'medium', 'low')),
+  "dueDate" TEXT,
+  done BOOLEAN DEFAULT false,
+  "createdAt" TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- ── Row Level Security ────────────────────────────────────────
 ALTER TABLE profiles    ENABLE ROW LEVEL SECURITY;
 ALTER TABLE subjects    ENABLE ROW LEVEL SECURITY;
@@ -144,6 +155,7 @@ ALTER TABLE submissions ENABLE ROW LEVEL SECURITY;
 ALTER TABLE progress    ENABLE ROW LEVEL SECURITY;
 ALTER TABLE gamification ENABLE ROW LEVEL SECURITY;
 ALTER TABLE completions ENABLE ROW LEVEL SECURITY;
+ALTER TABLE tasks       ENABLE ROW LEVEL SECURITY;
 
 -- Authenticated users can read/write all data
 CREATE POLICY "auth_all" ON profiles    FOR ALL TO authenticated USING (true) WITH CHECK (true);
@@ -156,3 +168,4 @@ CREATE POLICY "auth_all" ON submissions FOR ALL TO authenticated USING (true) WI
 CREATE POLICY "auth_all" ON progress    FOR ALL TO authenticated USING (true) WITH CHECK (true);
 CREATE POLICY "auth_all" ON gamification FOR ALL TO authenticated USING (true) WITH CHECK (true);
 CREATE POLICY "auth_all" ON completions FOR ALL TO authenticated USING (true) WITH CHECK (true);
+CREATE POLICY "auth_all" ON tasks       FOR ALL TO authenticated USING (true) WITH CHECK (true);

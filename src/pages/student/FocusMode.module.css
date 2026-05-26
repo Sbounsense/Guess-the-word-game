@@ -1,0 +1,67 @@
+/* Mode tab pills */
+.modeTabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.modeTab {
+  padding: 9px 22px;
+  border-radius: 99px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  font-family: var(--font);
+}
+
+.modeTab:hover:not(.modeTabActive) {
+  background: var(--surface-alt);
+  border-color: var(--border-dark);
+  color: var(--text);
+}
+
+.modeTabActive {
+  color: #fff;
+}
+
+/* Timer section */
+.timerSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.timerSvg {
+  width: 200px;
+  height: 200px;
+  filter: drop-shadow(var(--shadow-lg));
+}
+
+.modeLabel {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-top: -4px;
+}
+
+.controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sessionCounter {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}

@@ -6,10 +6,13 @@ import styles from './Sidebar.module.css'
 
 const NAV = {
   student: [
-    { to: '/student',         icon: '⊞', label: 'Dashboard' },
-    { to: '/leaderboard',     icon: '🏆', label: 'Leaderboard' },
-    { to: '/student/history', icon: '◷',  label: 'History' },
-    { to: '/profile',         icon: '◎',  label: 'My Profile' },
+    { to: '/student',          icon: '⊞', label: 'Dashboard'   },
+    { to: '/student/tasks',    icon: '✓',  label: 'Tasks'       },
+    { to: '/student/focus',    icon: '⏱',  label: 'Focus'       },
+    { to: '/student/library',  icon: '📚', label: 'Library'     },
+    { to: '/student/progress', icon: '◑',  label: 'Progress'    },
+    { to: '/leaderboard',      icon: '🏆', label: 'Leaderboard' },
+    { to: '/profile',          icon: '◎',  label: 'My Profile'  },
   ],
   teacher: [
     { to: '/teacher',          icon: '⊞', label: 'Dashboard' },

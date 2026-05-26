@@ -14,6 +14,10 @@ import StudySession from './pages/student/StudySession.jsx'
 import Leaderboard from './pages/student/Leaderboard.jsx'
 import Profile from './pages/student/Profile.jsx'
 import SessionHistory from './pages/student/SessionHistory.jsx'
+import FocusMode from './pages/student/FocusMode.jsx'
+import ResourceHub from './pages/student/ResourceHub.jsx'
+import ProgressPage from './pages/student/ProgressPage.jsx'
+import Tasks from './pages/student/Tasks.jsx'
 
 // Teacher pages
 import TeacherDashboard from './pages/teacher/TeacherDashboard.jsx'
@@ -53,7 +57,11 @@ function AppRoutes() {
         <Route path="/study/:deckId" element={<ProtectedRoute roles={['student']}><StudySession /></ProtectedRoute>} />
         <Route path="/leaderboard" element={<ProtectedRoute roles={['student']}><Leaderboard /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute roles={['student']}><Profile /></ProtectedRoute>} />
-        <Route path="/student/history" element={<ProtectedRoute roles={['student']}><SessionHistory /></ProtectedRoute>} />
+        <Route path="/student/history"   element={<ProtectedRoute roles={['student']}><SessionHistory /></ProtectedRoute>} />
+        <Route path="/student/focus"     element={<ProtectedRoute roles={['student']}><FocusMode /></ProtectedRoute>} />
+        <Route path="/student/library"   element={<ProtectedRoute roles={['student']}><ResourceHub /></ProtectedRoute>} />
+        <Route path="/student/progress"  element={<ProtectedRoute roles={['student']}><ProgressPage /></ProtectedRoute>} />
+        <Route path="/student/tasks"     element={<ProtectedRoute roles={['student']}><Tasks /></ProtectedRoute>} />
 
         {/* Teacher */}
         <Route path="/teacher" element={<ProtectedRoute roles={['teacher']}><TeacherDashboard /></ProtectedRoute>} />
