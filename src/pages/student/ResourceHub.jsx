@@ -37,17 +37,23 @@ export default function ResourceHub() {
     ? assignedLessons.filter(l => l.title?.toLowerCase().includes(q))
     : assignedLessons
 
+  // Lessons don't have subjectId — resolve via their module
+  function subjectIdForLesson(lesson) {
+    const mod = allModules.find(m => m.id === lesson.moduleId)
+    return mod?.subjectId || null
+  }
+
   // Build sections: one per subject + one "Other"
   const sections = subjects.map(subj => {
     const decks = filteredDecks.filter(d => d.subjectId === subj.id)
-    const lessons = filteredLessons.filter(l => l.subjectId === subj.id)
+    const lessons = filteredLessons.filter(l => subjectIdForLesson(l) === subj.id)
     return { id: subj.id, name: subj.name, decks, lessons }
   })
 
   // Other: decks/lessons with no matching subject
   const subjectIds = new Set(subjects.map(s => s.id))
   const otherDecks = filteredDecks.filter(d => !subjectIds.has(d.subjectId))
-  const otherLessons = filteredLessons.filter(l => !subjectIds.has(l.subjectId))
+  const otherLessons = filteredLessons.filter(l => !subjectIds.has(subjectIdForLesson(l)))
 
   // Remove empty sections when searching
   const visibleSections = sections.filter(s => s.decks.length > 0 || s.lessons.length > 0)

@@ -1,0 +1,48 @@
+.mobileBar {
+  display: none;
+}
+
+.hamburger {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+}
+.hamburger:hover { background: var(--bg); }
+
+.mobileLogo {
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileBar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 90;
+    width: 100%;
+  }
+
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 110;
+  }
+}

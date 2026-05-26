@@ -29,7 +29,7 @@ const NAV = {
   ],
 }
 
-export default function Sidebar() {
+export default function Sidebar({ mobileOpen, onClose }) {
   const { currentUser, logout } = useAuth()
   const { getUserStats } = useGamification()
   const navigate = useNavigate()
@@ -46,7 +46,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className={styles.sidebar}>
+    <aside className={`${styles.sidebar} ${mobileOpen ? styles.sidebarOpen : ''}`}>
       {/* Logo */}
       <div className={styles.logo}>
         <div className={styles.logoMark}>E</div>
@@ -62,6 +62,7 @@ export default function Sidebar() {
             to={l.to}
             end={l.to.split('/').length <= 2}
             className={({ isActive }) => `${styles.link} ${isActive ? styles.active : ''}`}
+            onClick={onClose}
           >
             <span className={styles.icon}>{l.icon}</span>
             {l.label}
