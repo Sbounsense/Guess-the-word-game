@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
+import { supabaseConfigured } from '../services/supabase.js'
 import Button from '../components/ui/Button.jsx'
 import styles from './LoginPage.module.css'
 
@@ -25,22 +26,32 @@ export default function LoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault()
     setSubmitting(true); setError('')
-    const { error } = await signIn(email, password)
-    if (error) { setError(error.message); setSubmitting(false) }
-    // On success: onAuthStateChange sets currentUser → useEffect above navigates
+    try {
+      const { error } = await signIn(email, password)
+      if (error) setError(error.message)
+    } catch {
+      setError('Could not connect to the server. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   const handleSignUp = async (e) => {
     e.preventDefault()
     if (!name.trim()) { setError('Please enter your name.'); return }
     setSubmitting(true); setError('')
-    const { data, error } = await signUp(email, password, name.trim(), role)
-    if (error) { setError(error.message); setSubmitting(false); return }
-    if (!data?.session) {
-      setInfo('Account created! Check your email to confirm, then sign in.')
-      setTab('login')
+    try {
+      const { data, error } = await signUp(email, password, name.trim(), role)
+      if (error) { setError(error.message); return }
+      if (!data?.session) {
+        setInfo('Account created! Check your email to confirm, then sign in.')
+        setTab('login')
+      }
+    } catch {
+      setError('Could not connect to the server. Please try again.')
+    } finally {
+      setSubmitting(false)
     }
-    setSubmitting(false)
   }
 
   return (
@@ -54,6 +65,12 @@ export default function LoginPage() {
           <button className={`${styles.tab} ${tab === 'login'  ? styles.active : ''}`} onClick={() => { setTab('login');  setError(''); setInfo('') }}>Sign In</button>
           <button className={`${styles.tab} ${tab === 'signup' ? styles.active : ''}`} onClick={() => { setTab('signup'); setError(''); setInfo('') }}>Create Account</button>
         </div>
+
+        {!supabaseConfigured && (
+          <div className={styles.error}>
+            ⚠️ Supabase is not connected. Add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> to your Vercel environment variables and redeploy.
+          </div>
+        )}
 
         {error && <div className={styles.error}>{error}</div>}
         {info  && <div className={styles.info}>{info}</div>}
