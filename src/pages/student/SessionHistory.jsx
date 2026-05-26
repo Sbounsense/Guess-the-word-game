@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useData } from '../../context/DataContext.jsx'
-import { storage } from '../../services/storage.js'
 import Card from '../../components/ui/Card.jsx'
 import styles from './SessionHistory.module.css'
 
@@ -23,10 +22,10 @@ const modeLabel = (mode) => ({ word_guess: 'Word Guess', flashcard: 'Flashcard',
 
 export default function SessionHistory() {
   const { currentUser } = useAuth()
-  const { getDecks } = useData()
+  const { getDecks, getProgress } = useData()
   const navigate = useNavigate()
 
-  const sessions = storage.getProgress()
+  const sessions = getProgress()
     .filter(p => p.userId === currentUser.id)
     .sort((a, b) => new Date(b.sessionDate) - new Date(a.sessionDate))
 

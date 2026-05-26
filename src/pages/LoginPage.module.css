@@ -170,3 +170,25 @@
 
 .roleBtn:hover { border-color: var(--primary-mid); color: var(--primary); }
 .roleActive { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+
+.error {
+  background: #fff0f0;
+  border: 1px solid #fca5a5;
+  color: #b91c1c;
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: 0.83rem;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+.info {
+  background: #f0f9ff;
+  border: 1px solid #7dd3fc;
+  color: #0369a1;
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: 0.83rem;
+  margin-bottom: 4px;
+  text-align: left;
+}

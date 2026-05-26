@@ -1,17 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useData } from '../../context/DataContext.jsx'
-import { storage } from '../../services/storage.js'
 import Card from '../../components/ui/Card.jsx'
 import styles from './ClassProgress.module.css'
 
 export default function ClassProgress() {
   const { currentUser } = useAuth()
-  const { getUsers, getModules, getSubmissions, getHomework } = useData()
+  const { getUsers, getModules, getSubmissions, getHomework, getProgress, getUserGamification } = useData()
   const navigate = useNavigate()
 
   const students = getUsers().filter(u => u.role === 'student' && u.active !== false)
-  const progress = storage.getProgress()
+  const progress = getProgress()
   const submissions = getSubmissions()
   const myHomework = getHomework().filter(h => h.createdBy === currentUser.id)
 
@@ -41,7 +40,7 @@ export default function ClassProgress() {
                   : null
                 const hwDone = submissions.filter(sub => sub.studentId === s.id).length
                 const hwTotal = myHomework.filter(h => h.assignedTo.includes(s.id)).length
-                const g = storage.getUserGamification(s.id)
+                const g = getUserGamification(s.id)
 
                 return (
                   <tr key={s.id} onClick={() => navigate(`/teacher/students/${s.id}`)} style={{ cursor: 'pointer' }}>

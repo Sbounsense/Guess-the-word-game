@@ -1,19 +1,18 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { useData } from '../../context/DataContext.jsx'
-import { storage } from '../../services/storage.js'
 import { calcLevel } from '../../utils/gamification.js'
 import Card from '../../components/ui/Card.jsx'
 import styles from './StudentDetail.module.css'
 
 export default function StudentDetail() {
   const { studentId } = useParams()
-  const { getUsers, getModules, getLessons, getHomework, getSubmissions, getCompletions } = useData()
+  const { getUsers, getModules, getLessons, getHomework, getSubmissions, getCompletions, getUserGamification, getProgress, getDecks } = useData()
   const navigate = useNavigate()
 
   const student = getUsers().find(u => u.id === studentId)
   if (!student) return <div className="page"><p>Student not found.</p></div>
 
-  const g = storage.getUserGamification(studentId)
+  const g = getUserGamification(studentId)
   const lvl = calcLevel(g.totalXP)
 
   const modules = getModules().filter(m => m.assignedTo?.includes(studentId))
@@ -21,11 +20,11 @@ export default function StudentDetail() {
   const completions = getCompletions(studentId)
   const homework = getHomework().filter(h => h.assignedTo?.includes(studentId))
   const submissions = getSubmissions().filter(s => s.studentId === studentId)
-  const sessions = storage.getProgress().filter(p => p.userId === studentId)
+  const sessions = getProgress().filter(p => p.userId === studentId)
     .sort((a, b) => new Date(b.sessionDate) - new Date(a.sessionDate))
     .slice(0, 10)
 
-  const allDecks = storage.getDecks()
+  const allDecks = getDecks()
 
   const hwStatus = (hw) => {
     const sub = submissions.find(s => s.homeworkId === hw.id)

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useGamification } from '../../context/GamificationContext.jsx'
-import { storage } from '../../services/storage.js'
+import { useData } from '../../context/DataContext.jsx'
 import { calcLevel } from '../../utils/gamification.js'
 import XPBar from '../../components/gamification/XPBar.jsx'
 import BadgeGrid from '../../components/gamification/BadgeGrid.jsx'
@@ -12,9 +12,10 @@ import styles from './Profile.module.css'
 export default function Profile() {
   const { currentUser } = useAuth()
   const { getUserStats } = useGamification()
+  const { getProgress } = useData()
   const navigate = useNavigate()
   const stats = getUserStats(currentUser.id)
-  const progress = storage.getProgress().filter(p => p.userId === currentUser.id)
+  const progress = getProgress().filter(p => p.userId === currentUser.id)
   const lvl = calcLevel(stats.totalXP)
 
   return (

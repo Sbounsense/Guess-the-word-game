@@ -95,3 +95,4 @@
 }
 
 .roleActive { border-color: var(--primary); background: var(--primary-light); color: var(--primary); }
+.hint { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 20px; }

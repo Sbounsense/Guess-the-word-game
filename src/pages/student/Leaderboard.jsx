@@ -1,18 +1,17 @@
 import { useState } from 'react'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useData } from '../../context/DataContext.jsx'
-import { storage } from '../../services/storage.js'
 import { calcLevel } from '../../utils/gamification.js'
 import Card from '../../components/ui/Card.jsx'
 import styles from './Leaderboard.module.css'
 
 export default function Leaderboard() {
   const { currentUser } = useAuth()
-  const { getUsers } = useData()
+  const { getUsers, getAllGamification } = useData()
   const [tab, setTab] = useState('alltime')
 
   const students = getUsers().filter(u => u.role === 'student' && u.active !== false)
-  const gamificationMap = storage.getGamification()
+  const gamificationMap = getAllGamification()
 
   const ranked = students
     .map(u => {

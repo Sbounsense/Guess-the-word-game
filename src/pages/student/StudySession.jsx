@@ -3,7 +3,6 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import { useData } from '../../context/DataContext.jsx'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useGamification } from '../../context/GamificationContext.jsx'
-import { storage } from '../../services/storage.js'
 import { shuffle } from '../../utils/shuffle.js'
 import WordGuessGame from '../../components/game/WordGuessGame.jsx'
 import FlashcardFlip from '../../components/game/FlashcardFlip.jsx'
@@ -41,24 +40,12 @@ export default function StudySession() {
     setDone(false)
   }
 
-  const handleResult = (wasCorrect) => {
+  const handleResult = async (wasCorrect) => {
     const newCorrect = correct + (wasCorrect ? 1 : 0)
     if (idx + 1 >= cards.length) {
       const total = cards.length
       const isPerfect = newCorrect === total
-      const result = recordSession(currentUser.id, { correct: newCorrect, total, isPerfect })
-      // save to progress
-      const progress = storage.getProgress()
-      progress.push({
-        userId: currentUser.id,
-        deckId,
-        sessionDate: new Date().toISOString(),
-        score: newCorrect,
-        total,
-        xpEarned: result.xp,
-        mode,
-      })
-      storage.setProgress(progress)
+      const result = await recordSession(currentUser.id, { correct: newCorrect, total, isPerfect, deckId, mode })
       setSessionResult({ correct: newCorrect, total, xp: result.xp })
       setDone(true)
     } else {
