@@ -203,3 +203,15 @@
   margin-bottom: 4px;
   text-align: left;
 }
+
+.connected {
+  background: var(--success-light);
+  border: 1px solid var(--success);
+  color: var(--success-dark);
+  border-radius: var(--radius-sm);
+  padding: 7px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+  text-align: left;
+}

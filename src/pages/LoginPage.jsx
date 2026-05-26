@@ -1,9 +1,17 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
-import { supabaseConfigured } from '../services/supabase.js'
+import { supabase, supabaseConfigured } from '../services/supabase.js'
 import Button from '../components/ui/Button.jsx'
 import styles from './LoginPage.module.css'
+
+function networkErrorMessage(err) {
+  const msg = err?.message || ''
+  if (msg.toLowerCase().includes('load failed') || msg.toLowerCase().includes('network') || msg.toLowerCase().includes('fetch')) {
+    return 'Cannot reach the server. Your Supabase project may be paused — go to supabase.com, open your project and click "Restore". Then try again.'
+  }
+  return msg || 'An unexpected error occurred. Please try again.'
+}
 
 export default function LoginPage() {
   const { currentUser, signIn, signUp } = useAuth()
@@ -17,11 +25,19 @@ export default function LoginPage() {
   const [error, setError]         = useState('')
   const [info, setInfo]           = useState('')
   const [submitting, setSubmitting]= useState(false)
+  const [reachable, setReachable] = useState(null)
 
-  // Redirect once authenticated
   useEffect(() => {
     if (currentUser) navigate(`/${currentUser.role}`, { replace: true })
   }, [currentUser])
+
+  // Quick reachability probe — pings the auth endpoint
+  useEffect(() => {
+    if (!supabaseConfigured) return
+    supabase.auth.getSession()
+      .then(() => setReachable(true))
+      .catch(() => setReachable(false))
+  }, [])
 
   const handleLogin = async (e) => {
     e.preventDefault()
@@ -29,8 +45,8 @@ export default function LoginPage() {
     try {
       const { error } = await signIn(email, password)
       if (error) setError(error.message)
-    } catch {
-      setError('Could not connect to the server. Please try again.')
+    } catch (err) {
+      setError(networkErrorMessage(err))
     } finally {
       setSubmitting(false)
     }
@@ -47,12 +63,14 @@ export default function LoginPage() {
         setInfo('Account created! Check your email to confirm, then sign in.')
         setTab('login')
       }
-    } catch {
-      setError('Could not connect to the server. Please try again.')
+    } catch (err) {
+      setError(networkErrorMessage(err))
     } finally {
       setSubmitting(false)
     }
   }
+
+  const blocked = submitting || !supabaseConfigured || reachable === false
 
   return (
     <div className={styles.page}>
@@ -68,8 +86,18 @@ export default function LoginPage() {
 
         {!supabaseConfigured && (
           <div className={styles.error}>
-            ⚠️ Supabase is not connected. Add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> to your Vercel environment variables and redeploy.
+            ⚠️ Supabase is not connected. Add <strong>VITE_SUPABASE_URL</strong> and <strong>VITE_SUPABASE_ANON_KEY</strong> to your Vercel environment variables, then trigger a new deployment.
           </div>
+        )}
+
+        {supabaseConfigured && reachable === false && (
+          <div className={styles.error}>
+            ⚠️ Cannot reach your Supabase project. It may be paused (free tier pauses after 1 week). Go to <strong>supabase.com → your project → click Restore</strong>, wait 30 seconds, then refresh this page.
+          </div>
+        )}
+
+        {supabaseConfigured && reachable === true && (
+          <div className={styles.connected}>✓ Connected to database</div>
         )}
 
         {error && <div className={styles.error}>{error}</div>}
@@ -81,7 +109,7 @@ export default function LoginPage() {
             <input className={styles.input} type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="you@example.com" autoFocus required />
             <label className={styles.label}>Password</label>
             <input className={styles.input} type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-            <Button type="submit" variant="primary" size="lg" style={{ width: '100%', marginTop: 8 }} disabled={submitting}>
+            <Button type="submit" variant="primary" size="lg" style={{ width: '100%', marginTop: 8 }} disabled={blocked}>
               {submitting ? 'Signing in…' : 'Sign In'}
             </Button>
           </form>
@@ -105,7 +133,7 @@ export default function LoginPage() {
                 </button>
               ))}
             </div>
-            <Button type="submit" variant="primary" size="lg" style={{ width: '100%', marginTop: 8 }} disabled={submitting}>
+            <Button type="submit" variant="primary" size="lg" style={{ width: '100%', marginTop: 8 }} disabled={blocked}>
               {submitting ? 'Creating account…' : 'Create Account'}
             </Button>
           </form>
