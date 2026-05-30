@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
-import { supabase } from '../lib/supabase.js' // used for password reset
+import { supabase } from '../services/supabase.js' // used for password reset
 import Button from '../components/ui/Button.jsx'
 import styles from './LoginPage.module.css'
 
